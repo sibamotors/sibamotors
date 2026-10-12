@@ -1,0 +1,23 @@
+# OPTIONAL reference file (Render "Blueprint"). If your site already runs, you do
+# NOT need this — just copy the same settings in the Render dashboard (see
+# docs/DEPLOY-FA.md). Using it with "New → Blueprint" would create a NEW service.
+services:
+  - type: web
+    name: sibamotor
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /login
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_BOOTSTRAP_USERNAME
+        sync: false
+      - key: ADMIN_BOOTSTRAP_PASSWORD
+        sync: false
